@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:58:18 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/22 16:34:37 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/22 18:13:17 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int main (int ac, char **av)
 	{
         return (__exit(NULL, &global, 1));
 	}
-	
+	if (!__launcher_threads(&global))
+		return (__exit("launcher problems !!\n", &global, 1));
     return (0);
 }
 

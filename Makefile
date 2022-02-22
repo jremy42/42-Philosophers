@@ -3,7 +3,8 @@ minilib/string/ft_strlen.c\
 minilib/print/ft_putstr_fd.c\
 minilib/stdlib/ft_atoi.c\
 minilib/stdlib/ft_atol.c\
-srcs/init.c
+srcs/init.c\
+srcs/launcher.c
 
 IFLAGS =  -I includes/
 #CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3

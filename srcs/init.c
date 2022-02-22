@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 16:33:50 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/22 16:35:28 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/22 18:56:55 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,41 @@ int __check_data(t_global *global)
 	return (1);
 }
 
+int __init_fork(t_global *global)
+{
+    int i;
+
+    i = 0;
+    
+    global->fork = malloc(sizeof(pthread_mutex_t) * global->number_of_philo);
+    if (!global->fork)
+        return (0);
+    while ( i < global->number_of_philo)
+    {
+        pthread_mutex_init(&global->fork[i], NULL);
+        i++;
+    }
+    return (1);
+}
+
 int __init_philo(t_global *global)
 {
 	int i;
 
 	i = 0;
+
+    __init_fork(global);
+    // attention ordre de recuperation des fourchettes
 	global->philo = malloc(sizeof(t_philo) * global->number_of_philo);
 	if (!global->philo)
 		return (0);
-	while (i <= global->number_of_philo)
+	while (i < global->number_of_philo)
 	{
 		global->philo[i] = malloc(sizeof(t_philo));
 		global->philo[i]->l_fork = FREE;
 		global->philo[i]->r_fork = FREE;
 		global->philo[i]->state = THINK;
+        global->philo[i]->number = i;
 		global->philo[i]->eat_counter = global->max_eat;
 		i++;
 	}
