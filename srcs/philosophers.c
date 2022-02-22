@@ -6,12 +6,11 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:58:18 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/22 12:57:22 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/22 16:34:37 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <stdio.h>
 
 void *func1(void *arg)
 {
@@ -29,35 +28,44 @@ void *func1(void *arg)
     pthread_exit(NULL);
 }
 
-void *func2(void *arg)
+int __exit(char *error, t_global *global, int ret)
 {
-    int i;
-
-    i = 0;
-
-    while (i < 10)
+    if (error)
+        __putstr_fd(error, 2);
+    if(global)
     {
-        sleep(2);
-        printf(CYAN"thread2 = %s\n"RESET, (char *)arg);
-        i++;
-    }
-    pthread_exit(NULL);
+    	if (global->ret_value)
+        	return(global->ret_value);
+	}
+    return (ret);
 }
-
 
 int main (int ac, char **av)
 {
+    t_global global;
+
+    if (ac < 5 || ac > 6)
+        return (__exit("wrong argument\n", NULL, 1));
+    if (!__init_global(ac, av, &global))
+	{
+        return (__exit(NULL, &global, 1));
+	}
+	
+    return (0);
+}
+
+
+/*
+
     pthread_t t1;
     pthread_t t2;
 
-    /*
     creer le mutex dans la struct;
-    nbr de philo
+    nbr de global
     
-    */
     (void)av;
     (void)ac;
-
+    // secure les pthread_create
     pthread_create(&t1, NULL, func1, "toto");
     pthread_create(&t2, NULL, func2, "tata");
     sleep(1);
@@ -65,5 +73,4 @@ int main (int ac, char **av)
     // attend le thread
     pthread_join(t1, NULL);
     pthread_join(t2, NULL);
-    return (0);
-}
+*/

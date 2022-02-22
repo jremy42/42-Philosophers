@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:58:25 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/22 12:30:10 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/22 16:35:43 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <limits.h>
 
 # define RESET   "\033[0m"
 # define BLACK   "\033[30m"      /* Black */
@@ -39,4 +41,36 @@
 # define __SUCCESS 1
 # define __FAIL 0
 
+typedef enum s_state
+{ DIE, EAT, SLEEP, THINK} t_state;
+
+typedef enum s_fork
+{BUSY, FREE} t_fork;
+
+typedef struct s_philo
+{
+    t_fork  l_fork;
+    t_fork  r_fork;
+    t_state state;
+    int     number;
+    int     eat_counter;
+    
+} t_philo;
+
+typedef struct s_global
+{
+    int number_of_philo;
+    int time_to_die;
+    int time_to_eat;
+    int time_to_sleep;
+    int max_eat;
+    int ret_value;
+    t_philo **philo;
+} t_global;
+
+void	__putstr_fd(char const *s, int fd);
+size_t	__strlen(const char *str);
+int     __atoi(const char *nb);
+int     __atol(const char *nb, int *res);
+int __init_global(int ac, char **av, t_global *global);
 #endif
