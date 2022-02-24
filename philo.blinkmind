@@ -1,0 +1,83 @@
+{
+  "rootTopicKey": "a9dfdfdc-7e1c-47fc-bd2d-124ab7d03868",
+  "editorRootTopicKey": "a9dfdfdc-7e1c-47fc-bd2d-124ab7d03868",
+  "focusKey": "50635678-9e42-4048-b6c6-fe3b23beb190",
+  "extData": {},
+  "topics": [
+    {
+      "key": "a9dfdfdc-7e1c-47fc-bd2d-124ab7d03868",
+      "parentKey": null,
+      "subKeys": [
+        "50635678-9e42-4048-b6c6-fe3b23beb190"
+      ],
+      "collapse": false,
+      "style": "{\"contentStyle\":{\"background\":\"#f7f7f7\",\"borderRadius\":\"20px\",\"borderStyle\":\"none\",\"borderWidth\":\"1px\"}}",
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "check[state]"
+        }
+      ]
+    },
+    {
+      "key": "50635678-9e42-4048-b6c6-fe3b23beb190",
+      "parentKey": "a9dfdfdc-7e1c-47fc-bd2d-124ab7d03868",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "eat"
+        }
+      ]
+    }
+  ],
+  "config": {
+    "readOnly": false,
+    "allowUndo": true,
+    "layoutDir": 0,
+    "theme": {
+      "name": "default",
+      "randomColor": true,
+      "background": "rgb(57,60,65)",
+      "highlightColor": "#50C9CE",
+      "marginH": 60,
+      "marginV": 20,
+      "contentStyle": {
+        "lineHeight": "1.5",
+        "fontSize": "16px"
+      },
+      "linkStyle": {
+        "lineRadius": 5,
+        "lineType": "curve",
+        "lineWidth": "3px"
+      },
+      "rootTopic": {
+        "contentStyle": {
+          "fontSize": "36px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px"
+        }
+      },
+      "primaryTopic": {
+        "contentStyle": {
+          "fontSize": "24px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px"
+        }
+      },
+      "normalTopic": {
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px"
+        }
+      }
+    }
+  },
+  "formatVersion": null
+}

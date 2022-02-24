@@ -6,27 +6,11 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:58:18 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/22 18:13:17 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/23 16:33:16 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-void *func1(void *arg)
-{
-    int i;
-
-    i = 0;
-
-    while(1);
-    while (i < 10)
-    {
-        sleep(1);
-        printf(RED"thread1 = %s\n"RESET, (char *)arg);
-        i++;
-    }
-    pthread_exit(NULL);
-}
 
 int __exit(char *error, t_global *global, int ret)
 {
@@ -42,22 +26,23 @@ int __exit(char *error, t_global *global, int ret)
 
 int main (int ac, char **av)
 {
-    t_global global;
+    t_global *global;
 
+    global = NULL;
     if (ac < 5 || ac > 6)
         return (__exit("wrong argument\n", NULL, 1));
+    __get_time();
     if (!__init_global(ac, av, &global))
 	{
-        return (__exit(NULL, &global, 1));
+        return (__exit(NULL, global, 1));
 	}
-	if (!__launcher_threads(&global))
-		return (__exit("launcher problems !!\n", &global, 1));
+	if (!__launcher_threads(global))
+		return (__exit("launcher problems !!\n", global, 1));
     return (0);
 }
 
 
 /*
-
     pthread_t t1;
     pthread_t t2;
 

@@ -4,16 +4,21 @@ minilib/print/ft_putstr_fd.c\
 minilib/stdlib/ft_atoi.c\
 minilib/stdlib/ft_atol.c\
 srcs/init.c\
-srcs/launcher.c
+srcs/utils.c\
+srcs/time.c\
+srcs/print.c\
+srcs/launcher.c\
+srcs/routine.c\
+srcs/state.c
 
 IFLAGS =  -I includes/
-#CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
+#CFLAGS = -Wall -Wextra -Werror
 CC = cc
 OBJ = $(addprefix $(OBJS_PATH), $(SRC:.c=.o))
 HEADER = includes/philosophers.h
 OBJS_PATH = ./objs/
-NAME = philosophers
+NAME = philo
 LIB_THREAD = -lpthread
 
 _GREY=	$'\033[30m
@@ -42,8 +47,6 @@ $(NAME): $(OBJ) ${HEADER} ${LIBFT}
 clean:
 	@printf "%-15s ${_RED}${_BOLD}${NAME}${_END}...\n" "Deleting"
 	@rm -rf ${OBJS_PATH} 2> /dev/null
-	@printf "%-15s ${_RED}${_BOLD}libft librairy${_END}...\n" "Deleting"
-	@make clean -C $(LIBFT)
 
 fclean: clean
 	rm -f $(NAME)
@@ -51,6 +54,6 @@ fclean: clean
 re: fclean all
 
 run : $(NAME)
-	valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./philosphers
+	valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all --tool=helgrind ./philosophers
 
 .PHONY: all clean fclean bonus re run

@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 16:33:50 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/22 18:56:55 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/24 16:42:48 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ int __init_fork(t_global *global)
 
     i = 0;
     
-    global->fork = malloc(sizeof(pthread_mutex_t) * global->number_of_philo);
-    if (!global->fork)
+    global->tab_fork = malloc(sizeof(t_fork) * global->number_of_philo);
+    if (!global->tab_fork)
         return (0);
     while ( i < global->number_of_philo)
     {
-        pthread_mutex_init(&global->fork[i], NULL);
+        global->tab_fork[i].busy = 0;
+        pthread_mutex_init(&global->tab_fork[i].fork, NULL);
         i++;
     }
     return (1);
@@ -55,40 +56,54 @@ int __init_philo(t_global *global)
 		return (0);
 	while (i < global->number_of_philo)
 	{
-		global->philo[i] = malloc(sizeof(t_philo));
-		global->philo[i]->l_fork = FREE;
-		global->philo[i]->r_fork = FREE;
-		global->philo[i]->state = THINK;
-        global->philo[i]->number = i;
-		global->philo[i]->eat_counter = global->max_eat;
+        memset(&global->philo[i], 0, sizeof(t_philo));
+		global->philo[i].l_fork = i;
+		global->philo[i].r_fork = (i + 1) % global->number_of_philo;
+        global->philo[i].pl_fork = 0;
+        global->philo[i].pr_fork = 0;
+        global->philo[i].last_eat = 0;
+		global->philo[i].state = THINK;
+        global->philo[i].number = i;
+		global->philo[i].eat_counter = global->max_eat;
+        global->philo[i].ph_global = NULL;
+        global->philo[i].ph_global = (void *)global;
+        pthread_mutex_init(&global->philo[i].print, NULL);        
 		i++;
 	}
 	return (1);
 }
 
-int __init_global(int ac, char **av, t_global *global)
+int __init_global(int ac, char **av, t_global **global)
 {
-    global->ret_value = 0;
-    if (!__atol(av[1], &(global)->number_of_philo))
+    t_global *new;
+    
+    new = malloc(sizeof(t_global));
+    memset(new, 0, sizeof(t_global));
+    new->ret_value = 0;
+    if (!__atol(av[1], &(new)->number_of_philo))
         return (__putstr_fd("Wrong input in number philo\n", 2), 0);
-    if (!__atol(av[2], &(global)->time_to_die))
+    if (!__atol(av[2], &(new)->time_to_die))
         return (__putstr_fd("Please give me a valid input\n", 2), 0);
-    if (!__atol(av[3], &(global)->time_to_eat))
+    if (!__atol(av[3], &(new)->time_to_eat))
         return (__putstr_fd("Please give me a valid input\n", 2), 0);
-    if (!__atol(av[4], &(global)->time_to_sleep))
+    if (!__atol(av[4], &(new)->time_to_sleep))
         return (__putstr_fd("Please give me a valid input \n", 2), 0);
     if (ac == 6)
     {
-        if (!__atol(av[5], &(global)->max_eat))
+        if (!__atol(av[5], &(new)->max_eat))
         return (__putstr_fd("Please give me a digit\n", 2), 0);
     }
     else
 	{
-        global->max_eat = 0;
+        new->max_eat = 0;
 	}
-	if (!__check_data(global))
+	if (!__check_data(new))
 		return (0);
-	if (!__init_philo(global))
+	if (!__init_philo(new))
 		return (0);
+    new->death = 0;
+    new->start = 0;
+    pthread_mutex_init(&new->check, NULL);        
+    *global = new;
     return (1);
 }
