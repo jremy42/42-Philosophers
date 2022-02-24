@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:39:24 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/24 14:12:41 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/24 18:29:18 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int __launcher_threads(t_global *global)
         if ((i + 1)%2 == 0)
             __usleep(50);
         else
-            __usleep(1);
+            __usleep(10);
         //attention usleep
         // detach + boucle infinie if dead;
         i++;

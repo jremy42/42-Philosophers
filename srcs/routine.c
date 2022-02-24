@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:52:35 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/24 17:02:17 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/24 17:52:15 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int __check_dead(t_global *global)
     pthread_mutex_lock(&global->check);
     if(global->death)
     {
-        printf("global->death = %d\n", global->death);
+        //printf("global->death = %d\n", global->death);
         pthread_mutex_unlock(&global->check);
         return (0);
     }
@@ -28,9 +28,9 @@ int __check_dead(t_global *global)
 int __should_i_die(t_philo *philo, t_global *global)
 {
     //printf("philo dead = %lu\n get_time = %lu\n", philo->last_eat + (size_t)global->time_to_die, __get_time());
-    if (philo->last_eat + (size_t)global->time_to_die <= __get_time())
-        return (0);
-    return (1);
+    if (__get_time() > (philo->last_eat + (size_t)global->time_to_die))
+        return (1);
+    return (0);
 }
 
 int __check_state(t_state state, t_philo *philo, t_global *global)
