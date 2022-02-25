@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:58:25 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/24 16:46:01 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/25 10:08:15 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,40 +47,40 @@ typedef enum s_state
 
 typedef struct s_philo
 {
-    int     l_fork;
-    int     r_fork;
-    int     pl_fork;
-    int     pr_fork;
-    t_state state;
-    int     number;
-    int     eat_counter;
-    size_t  last_eat;
-    size_t  end_eat;
-    size_t  end_sleep;
-    struct s_global *ph_global;
-    pthread_mutex_t print;
-    
+	int     l_fork;
+	int     r_fork;
+	int     pl_fork;
+	int     pr_fork;
+	t_state state;
+	int     number;
+	int     eat_counter;
+	size_t  last_eat;
+	size_t  end_eat;
+	size_t  end_sleep;
+	struct s_global *ph_global;
+	pthread_mutex_t print;
+	
 } t_philo;
 
 typedef struct s_fork
 {
-    int busy;
-    pthread_mutex_t fork;
+	int busy;
+	pthread_mutex_t fork;
 } t_fork;
 
 typedef struct s_global
 {
-    int number_of_philo;
-    int time_to_die;
-    int time_to_eat;
-    int time_to_sleep;
-    int death;
-    int max_eat;
-    int ret_value;
-    size_t start;
-    pthread_mutex_t check;
-    t_fork *tab_fork; // faire un tableau de structure pour savoir si la fork est lock ou unlock 
-    t_philo *philo;
+	int number_of_philo;
+	int time_to_die;
+	int time_to_eat;
+	int time_to_sleep;
+	int death;
+	int max_eat;
+	int ret_value;
+	size_t start;
+	pthread_mutex_t check;
+	t_fork *tab_fork; // faire un tableau de structure pour savoir si la fork est lock ou unlock 
+	t_philo *philo;
 } t_global;
 
 void	__putstr_fd(char const *s, int fd);

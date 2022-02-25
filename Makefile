@@ -54,6 +54,6 @@ fclean: clean
 re: fclean all
 
 run : $(NAME)
-	valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all --tool=helgrind ./philosophers
+	valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all --tool=helgrind ./philo
 
 .PHONY: all clean fclean bonus re run
