@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:58:18 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/25 10:10:47 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/25 15:37:12 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	__exit(char *error, t_global *global, int ret)
 		__putstr_fd(error, 2);
 	if (global)
 	{
-		if (global->ret_value)
-			return (global->ret_value);
 		if (global->philo)
 			free(global->philo);
 		free(global);
@@ -27,7 +25,7 @@ int	__exit(char *error, t_global *global, int ret)
 	return (ret);
 }
 
-int	main (int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_global	*global;
 

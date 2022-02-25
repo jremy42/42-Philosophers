@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:13:37 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/25 11:58:53 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/25 15:50:55 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,5 @@ void	__print_message(t_state s, int p, size_t st, pthread_mutex_t pr)
 		(__get_time() - st), p + 1, __get_message(s));
 	pthread_mutex_unlock(&pr);
 }
+
 	

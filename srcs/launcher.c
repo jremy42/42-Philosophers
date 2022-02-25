@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:39:24 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/25 12:00:12 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/25 16:20:44 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,36 +30,31 @@ void	print_philo(t_global *global)
 
 int	__launcher_threads(t_global *global)
 {
-	//print_philo(global);
 	int			i;
 	pthread_t	*tid;
 
 	tid = malloc(sizeof(pthread_t) * global->number_of_philo);
 	i = 0;
-
 	global->start = __get_time();
 	while (i < global->number_of_philo)
 	{
-		if ( pthread_create(&tid[i], NULL, __routine, (void *)(&global->philo[i])) != 0)
+		if (pthread_create(&tid[i],
+				NULL, __routine, (void *)(&global->philo[i])) != 0)
 			return (0);
-		if ((i + 1) % 2 == 0)
-			__usleep(1);
+		if (!(global->number_of_philo) % 2)
+			__usleep(8);
 		else
 			__usleep(1);
-		//attention usleep
-		// detach + boucle infinie if dead;
 		i++;
 	}
 	i = 0;
-	while ( i < global->number_of_philo)
+	while (i < global->number_of_philo)
 	{
 		pthread_join(tid[i], NULL);
 		i++;
 	}
-	//sleep(10);
 	return (1);
 }
-
 
 /*
  pthread_mutex_lock(&(global->fork[0]));
