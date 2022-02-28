@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:58:25 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/25 16:49:39 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/28 11:32:37 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ typedef struct s_global
 	int				time_to_sleep;
 	int				death;
 	int				max_eat;
-	int				turn;
 	size_t			start;
 	pthread_mutex_t	check;
 	t_fork			*tab_fork;

@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:52:35 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/25 15:59:57 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/28 10:34:01 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	*__routine(void *send_philo)
 	f_state[SLEEP] = __sleeping;
 	f_state[THINK] = __try_to_eat;
 	philo = (t_philo *)send_philo;
+	philo->last_eat = 0;
 	pthread_mutex_lock(&philo->print);
 	global = (t_global *)(philo->ph_global);
 	pthread_mutex_unlock(&philo->print);

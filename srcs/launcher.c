@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:39:24 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/25 16:20:44 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/28 11:02:43 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	__launcher_threads(t_global *global)
 				NULL, __routine, (void *)(&global->philo[i])) != 0)
 			return (0);
 		if (!(global->number_of_philo) % 2)
-			__usleep(8);
+			__usleep(2);
 		else
 			__usleep(1);
 		i++;

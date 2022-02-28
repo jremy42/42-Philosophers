@@ -6,24 +6,11 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 14:46:22 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/25 17:57:19 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/28 12:04:18 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-int __am_i_priority(t_philo *philo, t_global *global)
-{
-	//printf("r_fork%zu\n", global->philo[philo->r_fork].last_eat);
-	pthread_mutex_lock(&global->philo[philo->r_fork].print);
-	if (global->philo[philo->r_fork].last_eat >= philo->last_eat)
-	{
-		pthread_mutex_unlock(&global->philo[philo->r_fork].print);
-		return (1);
-	}
-	pthread_mutex_unlock(&global->philo[philo->r_fork].print);
-	return (0);
-}
 
 void	__sleeping(t_philo *philo, t_global *global)
 {
@@ -44,8 +31,6 @@ void	__eating(t_philo *philo, t_global *global)
 		pthread_mutex_lock(&global->check);
 		global->tab_fork[philo->l_fork].busy = 0;
 		global->tab_fork[philo->r_fork].busy = 0;
-		global->turn = (philo->number + 1) % 2; //
-		//printf("global->turn = %d\n", global->turn);
 		pthread_mutex_unlock(&global->check);
 		philo->state = SLEEP;
 		__print_message(SLEEP, philo->number, global->start, philo->print);
@@ -56,61 +41,53 @@ void	__eating(t_philo *philo, t_global *global)
 void	__take_left_fork(t_philo *philo, t_global *global)
 {
 	pthread_mutex_lock(&global->check);
-	//printf("turn = %d / philo->number %d\n", global->turn, philo->number);
-	if (__am_i_priority(philo, global))
+	if (!philo->pl_fork && !global->tab_fork[philo->l_fork].busy)
 	{
-		//pthread_mutex_lock(&global->check);
-		if (!philo->pl_fork && !global->tab_fork[philo->l_fork].busy)
-		{
-			pthread_mutex_lock(&global->tab_fork[philo->l_fork].fork);
-			__print_message(L_FORK, philo->number, global->start, philo->print);
-			global->tab_fork[philo->l_fork].busy = 1;
-			pthread_mutex_unlock(&global->tab_fork[philo->l_fork].fork);
-			philo->pl_fork = 1;
-		}
-		if (philo->pl_fork && !philo->pr_fork
-			&& !global->tab_fork[philo->r_fork].busy)
-		{
-			pthread_mutex_lock(&global->tab_fork[philo->r_fork].fork);
-			__print_message(R_FORK, philo->number, global->start, philo->print);
-			global->tab_fork[philo->r_fork].busy = 1;
-			pthread_mutex_unlock(&global->tab_fork[philo->r_fork].fork);
-			philo->pr_fork = 1;
-		}
+		pthread_mutex_lock(&global->tab_fork[philo->l_fork].fork);
+		__print_message(L_FORK, philo->number, global->start, philo->print);
+		global->tab_fork[philo->l_fork].busy = 1;
+		pthread_mutex_unlock(&global->tab_fork[philo->l_fork].fork);
+		philo->pl_fork = 1;
+	}
+	if (philo->pl_fork && !philo->pr_fork
+		&& !global->tab_fork[philo->r_fork].busy)
+	{
+		pthread_mutex_lock(&global->tab_fork[philo->r_fork].fork);
+		__print_message(R_FORK, philo->number, global->start, philo->print);
+		global->tab_fork[philo->r_fork].busy = 1;
+		pthread_mutex_unlock(&global->tab_fork[philo->r_fork].fork);
+		philo->pr_fork = 1;
 	}
 	pthread_mutex_unlock(&global->check);
 }
 
 void	__take_right_fork(t_philo *philo, t_global *global)
 {
+	//printf("right_fork\n");
 	pthread_mutex_lock(&global->check);
-	//printf("turn = %d / philo->number %d\n", global->turn, philo->number);
-	if (__am_i_priority(philo, global))
+	if (!philo->pr_fork && !global->tab_fork[philo->r_fork].busy)
 	{
-		if (!philo->pr_fork && !global->tab_fork[philo->r_fork].busy)
-		{
-			pthread_mutex_lock(&global->tab_fork[philo->r_fork].fork);
-			__print_message(R_FORK, philo->number, global->start, philo->print);
-			global->tab_fork[philo->r_fork].busy = 1;
-			pthread_mutex_unlock(&global->tab_fork[philo->r_fork].fork);
-			philo->pr_fork = 1;
-		}
-		if (philo->pr_fork && !philo->pl_fork
-			&& !global->tab_fork[philo->l_fork].busy)
-		{
-			pthread_mutex_lock(&global->tab_fork[philo->l_fork].fork);
-			__print_message(L_FORK, philo->number, global->start, philo->print);
-			global->tab_fork[philo->l_fork].busy = 1;
-			pthread_mutex_unlock(&global->tab_fork[philo->l_fork].fork);
-			philo->pl_fork = 1;
-		}
+		pthread_mutex_lock(&global->tab_fork[philo->r_fork].fork);
+		__print_message(R_FORK, philo->number, global->start, philo->print);
+		global->tab_fork[philo->r_fork].busy = 1;
+		pthread_mutex_unlock(&global->tab_fork[philo->r_fork].fork);
+		philo->pr_fork = 1;
+	}
+	if (philo->pr_fork && !philo->pl_fork
+		&& !global->tab_fork[philo->l_fork].busy)
+	{
+		pthread_mutex_lock(&global->tab_fork[philo->l_fork].fork);
+		__print_message(L_FORK, philo->number, global->start, philo->print);
+		global->tab_fork[philo->l_fork].busy = 1;
+		pthread_mutex_unlock(&global->tab_fork[philo->l_fork].fork);
+		philo->pl_fork = 1;
 	}
 	pthread_mutex_unlock(&global->check);
 }
 
 void	__try_to_eat(t_philo *philo, t_global *global)
 {
-	if ((philo->number + 1) % 2 == 0)
+	if (1)
 		__take_left_fork(philo, global);
 	else
 		__take_right_fork(philo, global);
@@ -124,3 +101,4 @@ void	__try_to_eat(t_philo *philo, t_global *global)
 		philo->end_eat = __get_time() + (size_t)global->time_to_eat;
 	}
 }
+	

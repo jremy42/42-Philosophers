@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 16:33:50 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/25 17:43:08 by jremy            ###   ########.fr       */
+/*   Updated: 2022/02/28 11:38:18 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ int	__init_philo(t_global *global, int ac)
 	int	i;
 
 	i = 0;
-	if (!__init_fork(global))
-		return (__putstr_fd("Malloc Error\n", 2), 0);
 	global->philo = malloc(sizeof(t_philo) * global->number_of_philo);
-	if (!global->philo)
+	if (!global->philo || !__init_fork(global))
 		return (__putstr_fd("Malloc Error\n", 2), 0);
 	while (i < global->number_of_philo)
 	{
@@ -94,6 +92,7 @@ int	__init_global(int ac, char **av, t_global **global)
 		return (0);
 	if (!__init_philo(new, ac))
 		return (0);
+	//pthread_mutex_init(&new->check_eat, NULL);
 	pthread_mutex_init(&new->check, NULL);
 	*global = new;
 	return (1);
