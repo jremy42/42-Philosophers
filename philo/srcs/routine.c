@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:52:35 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/28 15:34:43 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/01 16:05:26 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	__should_i_die(t_philo *philo, t_global *global)
 
 int	__check_state(t_state state, t_philo *philo, t_global *global)
 {
+	if (global->number_of_philo > 50)
+		__usleep(9);
 	if (state != EAT)
 	{
 		if (__should_i_die(philo, global))
@@ -40,7 +42,7 @@ int	__check_state(t_state state, t_philo *philo, t_global *global)
 			pthread_mutex_lock(&global->check);
 			global->death = 1;
 			pthread_mutex_unlock(&global->check);
-			__print_message(DIE, philo->number, global->start, philo->print);
+			__print_message(DIE, global, philo);
 			return (0);
 		}
 	}
@@ -71,6 +73,10 @@ void	*__routine(void *send_philo)
 	pthread_mutex_lock(&philo->print);
 	global = (t_global *)(philo->ph_global);
 	pthread_mutex_unlock(&philo->print);
+	pthread_mutex_lock(&global->check);
+	pthread_mutex_unlock(&global->check);
+	if (philo->number % 2)
+		__usleep(10);
 	philo->last_eat = __get_time();
 	while (__check_state(philo->state, philo, global))
 		f_state[philo->state](philo, global);

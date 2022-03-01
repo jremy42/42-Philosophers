@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 16:33:50 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/28 15:07:29 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/01 15:20:38 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	__init_global(int ac, char **av, t_global **global)
 		return (free(new), 0);
 	if (!__init_philo(new, ac))
 		return (free(new), 0);
+	new->print = 1;
 	pthread_mutex_init(&new->check, NULL);
 	*global = new;
 	return (1);

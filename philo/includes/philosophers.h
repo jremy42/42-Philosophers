@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:58:25 by jremy             #+#    #+#             */
-/*   Updated: 2022/02/28 15:34:12 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/01 15:36:33 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_global
 	int				time_to_sleep;
 	int				death;
 	int				max_eat;
+	int				print;
 	size_t			start;
 	pthread_mutex_t	check;
 	t_fork			*tab_fork;
@@ -96,7 +97,7 @@ int		__init_global(int ac, char **av, t_global **global);
 int		__launcher_threads(t_global *global);
 void	__usleep(size_t sleep);
 size_t	__get_time(void);
-void	__print_message(t_state s, int p, size_t st, pthread_mutex_t pr);
+void	__print_message(t_state s, t_global *global, t_philo *philo);
 void	*__routine(void *send_philo);
 void	__try_to_eat(t_philo *philo, t_global *global);
 void	__eating(t_philo *philo, t_global *global);

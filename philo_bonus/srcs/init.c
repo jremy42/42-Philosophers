@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 16:33:50 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 12:37:51 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/01 13:42:30 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,15 @@ int	__init_fork(t_global *global)
 
 int __init_sem(t_global *global)
 {
+	sem_unlink("forks");
 	global->fork = sem_open("forks", O_CREAT, 0644, global->number_of_philo);
 	if (global->fork == SEM_FAILED)
 		return (0);
-	global->death = sem_open("death", O_CREAT, 0644, 10);
+	sem_unlink("death");
+	global->death = sem_open("death", O_CREAT, 0644, 1);
 	if (global->death == SEM_FAILED)
 		return (0);
+	sem_unlink("print");
 	global->print = sem_open("print", O_CREAT, 0644, 1);
 	if (global->print == SEM_FAILED)
 		return (0);

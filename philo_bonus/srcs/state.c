@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 14:46:22 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 10:40:39 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/01 14:55:23 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,10 @@ void	__take_right_fork(t_philo *philo, t_global *global)
 
 void	__try_to_eat(t_philo *philo, t_global *global)
 {
+	global->fork->__align -= 2;
+	printf("forks = %ld\n", global->fork->__align);
+	sem_wait(global->fork);
+	printf("forks 2 = %ld\n", global->fork->__align);
 	__take_left_fork(philo, global);
 	if (philo->pl_fork && philo->pr_fork)
 	{
