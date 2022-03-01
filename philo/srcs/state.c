@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 14:46:22 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 16:15:56 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/01 18:32:42 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	__sleeping(t_philo *philo, t_global *global)
 	if (__get_time() >= philo->end_sleep)
 	{
 		philo->state = THINK;
+		pthread_mutex_lock(&global->check);
 		__print_message(THINK, global, philo);
+		pthread_mutex_unlock(&global->check);
 	}
 }
 
@@ -30,9 +32,9 @@ void	__eating(t_philo *philo, t_global *global)
 		pthread_mutex_lock(&global->check);
 		global->tab_fork[philo->l_fork].busy = 0;
 		global->tab_fork[philo->r_fork].busy = 0;
-		pthread_mutex_unlock(&global->check);
 		philo->state = SLEEP;
 		__print_message(SLEEP, global, philo);
+		pthread_mutex_unlock(&global->check);
 		philo->end_sleep = __get_time() + (size_t)global->time_to_sleep;
 	}
 }
@@ -45,9 +47,7 @@ void	__take_left_fork(t_philo *philo, t_global *global)
 		pthread_mutex_lock(&global->tab_fork[philo->l_fork].fork);
 		global->tab_fork[philo->l_fork].busy = 1;
 		pthread_mutex_unlock(&global->tab_fork[philo->l_fork].fork);
-		pthread_mutex_unlock(&global->check);
 		__print_message(L_FORK, global, philo);
-		pthread_mutex_lock(&global->check);
 		philo->pl_fork = 1;
 	}
 	if (philo->pl_fork && !philo->pr_fork
@@ -56,9 +56,7 @@ void	__take_left_fork(t_philo *philo, t_global *global)
 		pthread_mutex_lock(&global->tab_fork[philo->r_fork].fork);
 		global->tab_fork[philo->r_fork].busy = 1;
 		pthread_mutex_unlock(&global->tab_fork[philo->r_fork].fork);
-		pthread_mutex_unlock(&global->check);
 		__print_message(R_FORK, global, philo);
-		pthread_mutex_lock(&global->check);
 		philo->pr_fork = 1;
 	}
 	pthread_mutex_unlock(&global->check);
@@ -95,7 +93,9 @@ void	__try_to_eat(t_philo *philo, t_global *global)
 		philo->state = EAT;
 		if (philo->eat_counter > 0)
 			philo->eat_counter--;
+		pthread_mutex_lock(&global->check);
 		__print_message(EAT, global, philo);
+		pthread_mutex_unlock(&global->check);
 		philo->last_eat = __get_time();
 		philo->end_eat = __get_time() + (size_t)global->time_to_eat;
 	}

@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:52:35 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 16:22:10 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/01 18:37:03 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,8 @@
 
 int	__check_dead(t_global *global)
 {
-	pthread_mutex_lock(&global->check);
 	if (global->death)
-	{
-		pthread_mutex_unlock(&global->check);
 		return (0);
-	}
-	pthread_mutex_unlock(&global->check);
 	return (1);
 }
 
@@ -40,21 +35,21 @@ int	__check_state(t_state state, t_philo *philo, t_global *global)
 		if (__should_i_die(philo, global))
 		{
 			pthread_mutex_lock(&global->check);
-			global->death = 1;
-			pthread_mutex_unlock(&global->check);
 			__print_message(DIE, global, philo);
-			return (0);
+			global->death = 1;
+			return (pthread_mutex_unlock(&global->check), 0);
 		}
 	}
+	pthread_mutex_lock(&global->check);
 	if (!__check_dead(global))
-		return (0);
+		return (pthread_mutex_unlock(&global->check), 0);
+	pthread_mutex_unlock(&global->check);
 	if (state == SLEEP && !philo->eat_counter)
 	{
 		pthread_mutex_lock(&global->check);
 		global->tab_fork[philo->l_fork].busy = 0;
 		global->tab_fork[philo->r_fork].busy = 0;
-		pthread_mutex_unlock(&global->check);
-		return (0);
+		return (pthread_mutex_unlock(&global->check), 0);
 	}
 	return (1);
 }	
@@ -76,7 +71,7 @@ void	*__routine(void *send_philo)
 	pthread_mutex_lock(&global->check);
 	pthread_mutex_unlock(&global->check);
 	if (philo->number % 2)
-		__usleep(global->time_to_eat - 1);
+		__usleep(global->time_to_eat - 10);
 	philo->last_eat = __get_time();
 	while (__check_state(philo->state, philo, global))
 		f_state[philo->state](philo, global);
