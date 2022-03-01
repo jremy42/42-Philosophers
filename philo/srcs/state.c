@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 14:46:22 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 18:32:42 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/01 18:59:33 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,29 +62,6 @@ void	__take_left_fork(t_philo *philo, t_global *global)
 	pthread_mutex_unlock(&global->check);
 }
 
-void	__take_right_fork(t_philo *philo, t_global *global)
-{
-	pthread_mutex_lock(&global->check);
-	if (!philo->pr_fork && !global->tab_fork[philo->r_fork].busy)
-	{
-		pthread_mutex_lock(&global->tab_fork[philo->r_fork].fork);
-		__print_message(R_FORK, global, philo);
-		global->tab_fork[philo->r_fork].busy = 1;
-		pthread_mutex_unlock(&global->tab_fork[philo->r_fork].fork);
-		philo->pr_fork = 1;
-	}
-	if (philo->pr_fork && !philo->pl_fork
-		&& !global->tab_fork[philo->l_fork].busy)
-	{
-		pthread_mutex_lock(&global->tab_fork[philo->l_fork].fork);
-		__print_message(L_FORK, global, philo);
-		global->tab_fork[philo->l_fork].busy = 1;
-		pthread_mutex_unlock(&global->tab_fork[philo->l_fork].fork);
-		philo->pl_fork = 1;
-	}
-	pthread_mutex_unlock(&global->check);
-}
-
 void	__try_to_eat(t_philo *philo, t_global *global)
 {
 	__take_left_fork(philo, global);
@@ -96,7 +73,7 @@ void	__try_to_eat(t_philo *philo, t_global *global)
 		pthread_mutex_lock(&global->check);
 		__print_message(EAT, global, philo);
 		pthread_mutex_unlock(&global->check);
-		philo->last_eat = __get_time();
 		philo->end_eat = __get_time() + (size_t)global->time_to_eat;
+		philo->last_eat = __get_time();
 	}
 }

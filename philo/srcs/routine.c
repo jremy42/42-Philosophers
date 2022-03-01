@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:52:35 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 18:37:03 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/01 18:44:53 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	__should_i_die(t_philo *philo, t_global *global)
 
 int	__check_state(t_state state, t_philo *philo, t_global *global)
 {
+	//usleep(1);
 	if (global->number_of_philo > 50)
 		__usleep(9);
 	if (state != EAT)
@@ -71,7 +72,7 @@ void	*__routine(void *send_philo)
 	pthread_mutex_lock(&global->check);
 	pthread_mutex_unlock(&global->check);
 	if (philo->number % 2)
-		__usleep(global->time_to_eat - 10);
+		__usleep(global->time_to_eat - 1);
 	philo->last_eat = __get_time();
 	while (__check_state(philo->state, philo, global))
 		f_state[philo->state](philo, global);
