@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 14:46:22 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 15:53:12 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/01 16:15:56 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,22 @@ void	__take_left_fork(t_philo *philo, t_global *global)
 	if (!philo->pl_fork && !global->tab_fork[philo->l_fork].busy)
 	{
 		pthread_mutex_lock(&global->tab_fork[philo->l_fork].fork);
-		__print_message(L_FORK, global, philo);
 		global->tab_fork[philo->l_fork].busy = 1;
 		pthread_mutex_unlock(&global->tab_fork[philo->l_fork].fork);
+		pthread_mutex_unlock(&global->check);
+		__print_message(L_FORK, global, philo);
+		pthread_mutex_lock(&global->check);
 		philo->pl_fork = 1;
 	}
 	if (philo->pl_fork && !philo->pr_fork
 		&& !global->tab_fork[philo->r_fork].busy)
 	{
 		pthread_mutex_lock(&global->tab_fork[philo->r_fork].fork);
-		__print_message(R_FORK, global, philo);
 		global->tab_fork[philo->r_fork].busy = 1;
 		pthread_mutex_unlock(&global->tab_fork[philo->r_fork].fork);
+		pthread_mutex_unlock(&global->check);
+		__print_message(R_FORK, global, philo);
+		pthread_mutex_lock(&global->check);
 		philo->pr_fork = 1;
 	}
 	pthread_mutex_unlock(&global->check);

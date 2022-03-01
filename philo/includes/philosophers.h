@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:58:25 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 15:36:33 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/01 16:10:47 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ void	*__routine(void *send_philo);
 void	__try_to_eat(t_philo *philo, t_global *global);
 void	__eating(t_philo *philo, t_global *global);
 void	__sleeping(t_philo *philo, t_global *global);
+int		__check_dead(t_global *global);
 
 #endif

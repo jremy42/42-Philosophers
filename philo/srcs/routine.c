@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:52:35 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 16:05:26 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/01 16:22:10 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	*__routine(void *send_philo)
 	pthread_mutex_lock(&global->check);
 	pthread_mutex_unlock(&global->check);
 	if (philo->number % 2)
-		__usleep(10);
+		__usleep(global->time_to_eat - 1);
 	philo->last_eat = __get_time();
 	while (__check_state(philo->state, philo, global))
 		f_state[philo->state](philo, global);
