@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:39:24 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 12:18:48 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/02 12:02:14 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	__launcher_threads(t_global *global)
 
 	i = 0;
 	global->start = __get_time();
+	sem_wait(global->launcher);
 	while (i < global->number_of_philo)
 	{
 		pid = fork();
@@ -36,6 +37,7 @@ int	__launcher_threads(t_global *global)
 			global->index_philo++;
 		}
 	}
+	sem_post(global->launcher);
 	while (waitpid(-1, NULL, 0) > 0)
 		;
 	return (1);

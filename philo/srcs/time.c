@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:02:30 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 18:55:24 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/02 10:11:31 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	__usleep(size_t sleep)
 
 	time = __get_time() + sleep;
 	while (__get_time() < time)
-		usleep(200);
+		usleep(10);
 }
 
 size_t	__get_time(void)

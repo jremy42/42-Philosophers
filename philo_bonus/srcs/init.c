@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 16:33:50 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 13:42:30 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/02 12:01:07 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	__init_fork(t_global *global)
 	return (1);
 }
 
-int __init_sem(t_global *global)
+int	__init_sem(t_global *global)
 {
 	sem_unlink("forks");
 	global->fork = sem_open("forks", O_CREAT, 0644, global->number_of_philo);
@@ -54,6 +54,9 @@ int __init_sem(t_global *global)
 	sem_unlink("print");
 	global->print = sem_open("print", O_CREAT, 0644, 1);
 	if (global->print == SEM_FAILED)
+		return (0);
+	global->launcher = sem_open("launcher", O_CREAT, 0644, 1);
+	if (global->launcher == SEM_FAILED)
 		return (0);
 	return (1);
 }
@@ -81,7 +84,6 @@ int	__init_philo(t_global *global, int ac)
 		else
 			global->philo[i].eat_counter = -1;
 		global->philo[i].ph_global = (void *)global;
-		//pthread_mutex_init(&global->philo[i].print, NULL);
 		i++;
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 14:46:22 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 18:59:33 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/02 10:18:16 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,24 @@ void	__sleeping(t_philo *philo, t_global *global)
 		pthread_mutex_lock(&global->check);
 		__print_message(THINK, global, philo);
 		pthread_mutex_unlock(&global->check);
+		return ;
 	}
+	//__usleep(global->time_to_sleep);
 }
 
 void	__eating(t_philo *philo, t_global *global)
 {
 	if (__get_time() >= philo->end_eat)
-	{
-		philo->pl_fork = 0;
-		philo->pr_fork = 0;
+	{	
 		pthread_mutex_lock(&global->check);
 		global->tab_fork[philo->l_fork].busy = 0;
 		global->tab_fork[philo->r_fork].busy = 0;
-		philo->state = SLEEP;
 		__print_message(SLEEP, global, philo);
 		pthread_mutex_unlock(&global->check);
+		philo->state = SLEEP;
 		philo->end_sleep = __get_time() + (size_t)global->time_to_sleep;
+		philo->pl_fork = 0;
+		philo->pr_fork = 0;
 	}
 }
 

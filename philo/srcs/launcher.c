@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:39:24 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 16:18:52 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/02 09:34:30 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	__launcher_threads(t_global *global)
 	if (!tid)
 		return (0);
 	i = 0;
-	global->start = __get_time();
 	pthread_mutex_lock(&global->check);
 	while (i < global->number_of_philo)
 	{
@@ -31,6 +30,7 @@ int	__launcher_threads(t_global *global)
 		i++;
 	}
 	i = 0;
+	global->start = __get_time();
 	pthread_mutex_unlock(&global->check);
 	while (i < global->number_of_philo)
 	{

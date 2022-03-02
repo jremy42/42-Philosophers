@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:58:18 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 12:41:32 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/02 12:07:17 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,10 @@ int	__exit(char *error, t_global *global, int ret)
 int	main(int ac, char **av)
 {
 	t_global	*global;
-	//sem_t *test;
-	//(void)ac;
-	//(void)av;
-
+	
 	global = NULL;
 	if (ac < 5 || ac > 6)
 		return (__exit("wrong argument\n", NULL, 1));
-	//__get_time();
-	//sem_t;
-	//sem_unlink()
-	//test = sem_open("forks", O_CREAT, 0644, 1);
-	//sem_wait(test);
-	//printf("sem_wait = 0\n");
-	//sem_wait(test);
-	// print
-	// lock
-	// death 
-	// 
 	if (!__init_global(ac, av, &global))
 	{
 		return (__exit(NULL, global, 1));

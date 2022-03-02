@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:58:25 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 12:29:40 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/02 12:00:25 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_global
 	sem_t			*fork;
 	sem_t			*death;
 	sem_t			*print;
+	sem_t			*launcher;
 	t_fork			*tab_fork;
 	t_philo			*philo;
 }	t_global;
@@ -100,7 +101,7 @@ int		__init_global(int ac, char **av, t_global **global);
 int		__launcher_threads(t_global *global);
 void	__usleep(size_t sleep);
 size_t	__get_time(void);
-void	__print_message(t_state s, int p, size_t st, int pr);
+void	__print_message(t_state s, t_global *global, t_philo *philo);
 int		__routine(t_global *global);
 void	__try_to_eat(t_philo *philo, t_global *global);
 void	__eating(t_philo *philo, t_global *global);

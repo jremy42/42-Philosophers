@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:13:37 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 10:42:01 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/02 12:05:59 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ char	*__get_message(t_state state)
 	return ("");
 }
 
-void	__print_message(t_state s, int p, size_t st, int pr)
+void	__print_message(t_state s, t_global *global, t_philo *philo)
 {
-	(void)pr;
-	//pthread_mutex_lock(&pr);
-	printf("%ld %d %s\n", (__get_time() - st), p + 1, __get_message(s));
-	//pthread_mutex_unlock(&pr);
+	if (global->death->__align)
+	{
+		sem_wait(global->print);
+		printf("%ld %d %s\n", (__get_time() - global->start), philo->number + 1,
+			__get_message(s));
+		sem_post(global->print);
+	}
 }

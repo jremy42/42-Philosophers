@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:52:35 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 18:44:53 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/02 11:44:25 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,31 +28,27 @@ int	__should_i_die(t_philo *philo, t_global *global)
 
 int	__check_state(t_state state, t_philo *philo, t_global *global)
 {
-	//usleep(1);
-	if (global->number_of_philo > 50)
-		__usleep(9);
+	if (global->number_of_philo > 5)
+		usleep(100);
+	pthread_mutex_lock(&global->check);
 	if (state != EAT)
 	{
 		if (__should_i_die(philo, global))
 		{
-			pthread_mutex_lock(&global->check);
 			__print_message(DIE, global, philo);
 			global->death = 1;
 			return (pthread_mutex_unlock(&global->check), 0);
 		}
 	}
-	pthread_mutex_lock(&global->check);
 	if (!__check_dead(global))
 		return (pthread_mutex_unlock(&global->check), 0);
-	pthread_mutex_unlock(&global->check);
 	if (state == SLEEP && !philo->eat_counter)
 	{
-		pthread_mutex_lock(&global->check);
 		global->tab_fork[philo->l_fork].busy = 0;
 		global->tab_fork[philo->r_fork].busy = 0;
 		return (pthread_mutex_unlock(&global->check), 0);
 	}
-	return (1);
+	return (pthread_mutex_unlock(&global->check), 1);
 }	
 
 void	*__routine(void *send_philo)
@@ -72,7 +68,7 @@ void	*__routine(void *send_philo)
 	pthread_mutex_lock(&global->check);
 	pthread_mutex_unlock(&global->check);
 	if (philo->number % 2)
-		__usleep(global->time_to_eat - 1);
+		__usleep(global->time_to_eat - 20);
 	philo->last_eat = __get_time();
 	while (__check_state(philo->state, philo, global))
 		f_state[philo->state](philo, global);
