@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 14:46:22 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/02 12:21:39 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/02 18:33:42 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,13 @@ void	__take_left_fork(t_philo *philo, t_global *global)
 {
 	if (global->fork->__align)
 	{
-		if (!philo->pl_fork && !global->tab_fork[philo->l_fork].busy)
+		if (!philo->pl_fork)
 		{
 			__print_message(L_FORK, global, philo);
 			sem_wait(global->fork);
 			philo->pl_fork = 1;
 		}
-		if (philo->pl_fork && !philo->pr_fork
-			&& !global->tab_fork[philo->r_fork].busy)
+		if (philo->pl_fork && !philo->pr_fork)
 		{
 			__print_message(R_FORK, global, philo);
 			sem_wait(global->fork);
@@ -59,14 +58,13 @@ void	__take_right_fork(t_philo *philo, t_global *global)
 {
 	if (global->fork->__align)
 	{
-		if (!philo->pr_fork && !global->tab_fork[philo->r_fork].busy)
+		if (!philo->pr_fork)
 		{
 			__print_message(R_FORK, global, philo);
 			sem_wait(global->fork);
 			philo->pr_fork = 1;
 		}
-		if (philo->pr_fork && !philo->pl_fork
-			&& !global->tab_fork[philo->l_fork].busy)
+		if (philo->pr_fork && !philo->pl_fork)
 		{
 			__print_message(L_FORK, global, philo);
 			sem_wait(global->fork);

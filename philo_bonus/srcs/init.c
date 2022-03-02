@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 16:33:50 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/02 12:01:07 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/02 18:18:43 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,6 @@ int	__check_data(t_global *global)
 	return (1);
 }
 
-int	__init_fork(t_global *global)
-{
-	int	i;
-
-	i = 0;
-	global->tab_fork = malloc(sizeof(t_fork) * global->number_of_philo);
-	if (!global->tab_fork)
-		return (0);
-	while (i < global->number_of_philo)
-	{
-		global->tab_fork[i].busy = 0;
-		i++;
-	}
-	return (1);
-}
-
 int	__init_sem(t_global *global)
 {
 	sem_unlink("forks");
@@ -55,6 +39,7 @@ int	__init_sem(t_global *global)
 	global->print = sem_open("print", O_CREAT, 0644, 1);
 	if (global->print == SEM_FAILED)
 		return (0);
+	sem_unlink("launcher");
 	global->launcher = sem_open("launcher", O_CREAT, 0644, 1);
 	if (global->launcher == SEM_FAILED)
 		return (0);
@@ -69,8 +54,6 @@ int	__init_philo(t_global *global, int ac)
 	global->philo = malloc(sizeof(t_philo) * global->number_of_philo);
 	if (!global->philo)
 		return (__putstr_fd("Malloc Error\n", 2), 0);
-	if (!__init_fork(global))
-		return (free(global->philo), __putstr_fd("Malloc Error\n", 2), 0);
 	while (i < global->number_of_philo)
 	{
 		memset(&global->philo[i], 0, sizeof(t_philo));
@@ -83,7 +66,6 @@ int	__init_philo(t_global *global, int ac)
 			global->philo[i].eat_counter = global->max_eat;
 		else
 			global->philo[i].eat_counter = -1;
-		global->philo[i].ph_global = (void *)global;
 		i++;
 	}
 	return (1);
