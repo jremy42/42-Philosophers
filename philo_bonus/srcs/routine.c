@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:52:35 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/02 18:33:20 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/02 18:53:05 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int	__routine(t_global *global)
 	philo->last_eat = 0;
 	sem_wait(global->launcher);
 	sem_post(global->launcher);
-	global->start = __get_time();
 	if (global->index_philo % 2)
 		__usleep(global->time_to_eat);
+	global->start = __get_time();
 	philo->last_eat = __get_time();
 	while (__check_state(philo->state, philo, global))
 		f_state[philo->state](philo, global);
