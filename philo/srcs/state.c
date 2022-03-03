@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 14:46:22 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/02 10:18:16 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/03 12:06:01 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	__sleeping(t_philo *philo, t_global *global)
 		pthread_mutex_unlock(&global->check);
 		return ;
 	}
-	//__usleep(global->time_to_sleep);
 }
 
 void	__eating(t_philo *philo, t_global *global)

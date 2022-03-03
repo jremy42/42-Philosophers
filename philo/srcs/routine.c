@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:52:35 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/02 11:44:25 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/03 12:02:18 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,11 @@ int	__check_state(t_state state, t_philo *philo, t_global *global)
 	if (global->number_of_philo > 5)
 		usleep(100);
 	pthread_mutex_lock(&global->check);
-	if (state != EAT)
+	if (__should_i_die(philo, global))
 	{
-		if (__should_i_die(philo, global))
-		{
-			__print_message(DIE, global, philo);
-			global->death = 1;
-			return (pthread_mutex_unlock(&global->check), 0);
-		}
+		__print_message(DIE, global, philo);
+		global->death = 1;
+		return (pthread_mutex_unlock(&global->check), 0);
 	}
 	if (!__check_dead(global))
 		return (pthread_mutex_unlock(&global->check), 0);

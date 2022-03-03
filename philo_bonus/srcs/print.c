@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 17:13:37 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/03 10:12:13 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/03 12:04:06 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*__get_message(t_state state)
 int	__print_message(t_state s, t_global *global, t_philo *philo)
 {
 	if (s == DIE)
-		usleep(100);
+		usleep(150);
 	if (global->death->__align == 1)
 	{
 		sem_wait(global->print);
