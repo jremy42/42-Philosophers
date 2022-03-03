@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:58:25 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/01 16:10:47 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/03 16:28:52 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_philo
 	size_t				end_eat;
 	size_t				end_sleep;
 	struct s_global		*ph_global;
-	pthread_mutex_t		print;
 }	t_philo;
 
 typedef struct s_fork
@@ -82,9 +81,9 @@ typedef struct s_global
 	int				time_to_sleep;
 	int				death;
 	int				max_eat;
-	int				print;
 	size_t			start;
 	pthread_mutex_t	check;
+	pthread_mutex_t	print;
 	t_fork			*tab_fork;
 	t_philo			*philo;
 }	t_global;

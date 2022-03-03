@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 14:46:22 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/03 12:06:01 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/03 16:35:38 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	__sleeping(t_philo *philo, t_global *global)
 {	
+	usleep(100);
 	if (__get_time() >= philo->end_sleep)
 	{
 		philo->state = THINK;
@@ -26,6 +27,7 @@ void	__sleeping(t_philo *philo, t_global *global)
 
 void	__eating(t_philo *philo, t_global *global)
 {
+	usleep(100);
 	if (__get_time() >= philo->end_eat)
 	{	
 		pthread_mutex_lock(&global->check);

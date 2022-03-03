@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 14:46:22 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/03 12:03:54 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/03 16:38:26 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	__eating(t_philo *philo, t_global *global)
 
 void	__take_left_fork(t_philo *philo, t_global *global)
 {
-	if (global->fork->__align)
+	if (global->fork->__align > 1)
 	{
 		if (!philo->pl_fork)
 		{

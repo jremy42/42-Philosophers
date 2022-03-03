@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 16:33:50 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/03 12:28:48 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/03 16:29:39 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	__init_philo(t_global *global, int ac)
 		else
 			global->philo[i].eat_counter = -1;
 		global->philo[i].ph_global = (void *)global;
-		pthread_mutex_init(&global->philo[i].print, NULL);
 		i++;
 	}
 	return (1);
@@ -97,8 +96,8 @@ int	__init_global(int ac, char **av, t_global **global)
 		return (free(new), 0);
 	if (!__init_philo(new, ac))
 		return (free(new), 0);
-	new->print = 1;
 	pthread_mutex_init(&new->check, NULL);
+	pthread_mutex_init(&new->print, NULL);
 	*global = new;
 	return (1);
 }
