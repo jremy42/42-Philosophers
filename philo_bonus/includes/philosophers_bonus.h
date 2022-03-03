@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:58:25 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/02 16:43:22 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/03 10:14:37 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@
 
 # define __SUCCESS 1
 # define __FAIL 0
-# define FORK "forks"
 
 typedef enum e_state
 {
@@ -90,6 +89,7 @@ typedef struct s_global
 	sem_t			*thread_death;
 	sem_t			*print;
 	sem_t			*launcher;
+	sem_t			*time;
 	t_philo			*philo;
 }	t_global;
 

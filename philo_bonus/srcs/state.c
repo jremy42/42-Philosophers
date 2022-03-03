@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 14:46:22 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/02 18:33:42 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/03 11:20:20 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	__sleeping(t_philo *philo, t_global *global)
 	{
 		philo->state = THINK;
 		__print_message(THINK, global, philo);
+		if (global->number_of_philo == 3)
+			__usleep((size_t)(global->time_to_eat * 2 - global->time_to_sleep));
 	}
 }
 

@@ -11,7 +11,7 @@ srcs/routine.c\
 srcs/state.c
 
 IFLAGS =  -I includes/
-#CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3 -g
+#CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 CFLAGS = -Wall -Wextra -Werror
 CC = clang
 OBJ = $(addprefix $(OBJS_PATH), $(SRC:.c=.o))

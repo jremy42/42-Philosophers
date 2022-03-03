@@ -6,7 +6,7 @@
 /*   By: jremy <jremy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:58:18 by jremy             #+#    #+#             */
-/*   Updated: 2022/03/02 18:34:48 by jremy            ###   ########.fr       */
+/*   Updated: 2022/03/03 10:34:55 by jremy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ int	__exit(char *error, t_global *global, int ret)
 {
 	if (error)
 		__putstr_fd(error, 2);
-	__sem_close("forks", global->fork);
-	__sem_close("death", global->death);
-	__sem_close("print", global->print);
-	__sem_close("launcher", global->launcher);
 	if (global)
 	{
+		__sem_close("forks", global->fork);
+		__sem_close("death", global->death);
+		__sem_close("print", global->print);
+		__sem_close("launcher", global->launcher);
+		__sem_close("time", global->time);
 		if (global->philo)
 			free(global->philo);
 		free(global);
