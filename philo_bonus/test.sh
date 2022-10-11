@@ -90,7 +90,6 @@ rm -rf leak%
 
 
 echo "test 9>"
-echo "must be 50"
 valgrind --log-file="leak" --leak-check=full --show-leak-kinds=all --undef-value-errors=no --error-exitcode=240 --errors-for-leak-kinds=all ./philo_bonus 5 800 200 200 10 | grep "eating" | wc -l
 if [  "$?" -ne "240" ]
 then
@@ -102,7 +101,6 @@ fi
 rm -rf leak
 
 echo "test 10>"
-echo "must be 45"
 valgrind --log-file="leak" --leak-check=full --show-leak-kinds=all --undef-value-errors=no --error-exitcode=240 --errors-for-leak-kinds=all ./philo_bonus 5 800 200 200 9 | grep "eating" | wc -l
 if [  "$?" -ne "240" ]
 then

@@ -1,9 +1,0 @@
-ctrl \ = split fenetre
-ctrl tab = naviguer fichier
-ctrl ` = ouvrir fermer le terminal
-option + fleche = deplacer la ligne vers le haut ou vers le bas
-ctrl shift \ = next bracket
-option = page up / page down
-home / end = debut fin de ligne
-vim 
-esc 0 = aller debut de ligne 

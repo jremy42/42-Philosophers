@@ -24,8 +24,7 @@ _GREY=	$'\033[30m
 _RED=	$'\033[31m
 _GREEN=	$'\033[32m
 _YELLOW=$'\033[33m
-_BLUE=	$'\033[34mint __synthax_checker(t_lexing *lexing)
-
+_BLUE=	$'\033[34m
 _PURPLE=$'\033[35m
 _CYAN=	$'\033[36m
 _WHITE=	$'\033[37m
@@ -52,10 +51,4 @@ fclean: clean
 
 re: fclean all
 
-run : $(NAME)
-	valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all --tool=helgrind ./philo
-
-malloc_test: $(OBJ) ${HEADER}
-	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${OBJ} -L. -lmallocator
-
-.PHONY: all clean fclean bonus re run
+.PHONY: all clean fclean bonus re
