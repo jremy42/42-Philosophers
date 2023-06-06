@@ -20,21 +20,6 @@ The 42-Philosophers project is a multithreaded program that simulates the dining
 
 ---
 
-## 💫 Features
-
-Feature | Description |
-|---|---|
-| **🏗 Structure and Organization** | The codebase is structured into separate folders for the main program, header files, and library functions. The makefiles allow for easy compilation and building of the program. |
-| **📝 Code Documentation** | The code is well documented with descriptive function and variable names, comments, and a separate header file for declarations, making it easy to understand the code's functionality without examining the implementation details. |
-| **🧩 Dependency Management** | The codebase uses standard C libraries for Time, String, and other functions, and includes custom library functions for string manipulation, making it easy to manage dependencies. |
-| **♻️ Modularity and Reusability** | The code is designed with modularity in mind, with separate functions and files for each individual task and reusable code in the libraries. The functions are designed to be reusable for similar programs or problems. |
-| **✔️ Testing and Quality Assurance** | The codebase includes a test script for checking for memory leaks, and the code is well formatted and commented, indicating a focus on quality control. |
-| **⚡️ Performance and Optimization** | The codebase uses mutexes and semaphores for synchronizing access to shared resources and minimizing race conditions, indicating an emphasis on performance and optimization. |
-| **🔒 Security Measures** | The codebase does not contain any known security vulnerabilities or exploits. |
-| **📈 Scalability and Extensibility** | The code is designed to handle a variable number of philosophers, forks, and threads, and can be easily extended and modified for similar problems. The use of standard libraries and modular functions also enables easy scalability. |
-
----
-
 
 <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-github-open.svg" width="80" />
 
@@ -139,7 +124,13 @@ make
 - number_of_times_each_philosopher_must_eat (optional argument): If all philosophers have eaten at least number_of_times_each_philosopher_must_eat times, the simulation ends. If this argument is not specified, then the simulation ends when a philosopher dies.
 
 ## 👏 Acquired knowledge
-
-> - [📌 Threading: The project explores the creation and manipulation of threads to represent each philosopher.]
+- ✅ Threading: The project explores the creation and manipulation of threads to represent each philosopher.
+- ✅ Processes: In the bonus part of the project, philosophers are represented by processes.
+- ✅ Mutex: The project introduces the use of mutexes for achieving mutual exclusion when accessing shared resources, such as forks.
+- ✅ Semaphores: In the bonus part, semaphores are used for synchronization between processes.
+- ✅ Shared memory: The project also touches upon the concept of shared memory for enabling communication and data sharing between philosophers.
+- ✅ Time management: The philosophers need to adhere to specific time constraints for eating, sleeping, and thinking, requiring time management within the program.
+- ✅ Resource management: The philosophers need to share forks to eat, necessitating proper management of shared resources to avoid conflicts and race conditions.
+- ✅ Logs and display: The project requires displaying the actions of philosophers with precise timestamps and a specific format.
 
 ---
