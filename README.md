@@ -14,22 +14,6 @@
 </p>
 </div>
 [![jremy's 42 Philosophers Score](https://badge42.vercel.app/api/v2/cl27cprhd001109mercwbbu5l/project/2510693)](https://github.com/JaeSeoKim/badge42)
----
-
-## 📚 Table of Contents
-- [📚 Table of Contents](#-table-of-contents)
-- [📍 Overview](#-overview)
-- [💫 Features](#-features)
-- [📂 Project Structure](#project-structure)
-- [🧩 Modules](#modules)
-- [🚀 Getting Started](#-getting-started)
-- [🗺 Roadmap](#-roadmap)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-- [👏 Acknowledgments](#-acknowledgments)
-
----
-
 
 ## 📍 Overview
 
@@ -147,56 +131,13 @@ make
 ### 🤖 Using 42-Philosophers
 
 ```sh
-./myapp 
+./philo [number_of_philosophers] [time_to_die] [time_to_eat] [time_to_sleep] [number_of_times_each_philosopher_must_eat]
 ```
-
-### 🧪 Running Tests
-```sh
-/* No common unit test framework in C */
-```
-
----
-
-
-## 🗺 Roadmap
-
-> - [X] [📌  Task 1: Implement X]
-> - [ ] [📌  Task 2: Refactor Y]
-> - [ ] [📌  Task 3: Optimize Z]
-> - [ ] ...
-
-
----
-
-## 🤝 Contributing
-
-Contributions are always welcome! Please follow these steps:
-1. Fork the project repository. This creates a copy of the project on your account that you can modify without affecting the original project.
-2. Clone the forked repository to your local machine using a Git client like Git or GitHub Desktop.
-3. Create a new branch with a descriptive name (e.g., `new-feature-branch` or `bugfix-issue-123`).
-```sh
-git checkout -b new-feature-branch
-```
-4. Make changes to the project's codebase.
-5. Commit your changes to your local branch with a clear commit message that explains the changes you've made.
-```sh
-git commit -m 'Implemented new feature.'
-```
-6. Push your changes to your forked repository on GitHub using the following command
-```sh
-git push origin new-feature-branch
-```
-7. Create a pull request to the original repository.
-Open a new pull request to the original project repository. In the pull request, describe the changes you've made and why they're necessary.
-The project maintainers will review your changes and provide feedback or merge them into the main branch.
-
----
-
-## 📄 License
-
-This project is licensed under the `[📌  INSERT-LICENSE-TYPE]` License. See the [LICENSE](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository) file for additional info.
-
----
+- number_of_philosophers: The number of philosophers, as well as the number of forks.
+- time_to_die (in milliseconds): If a philosopher hasn't started eating within time_to_die milliseconds after the beginning of their previous meal or since the start of the simulation, they die.
+- time_to_eat (in milliseconds): The time a philosopher takes to eat. During this time, a philosopher must hold onto both forks.
+- time_to_sleep (in milliseconds): The time a philosopher spends sleeping.
+- number_of_times_each_philosopher_must_eat (optional argument): If all philosophers have eaten at least number_of_times_each_philosopher_must_eat times, the simulation ends. If this argument is not specified, then the simulation ends when a philosopher dies.
 
 ## 👏 Acknowledgments
 
