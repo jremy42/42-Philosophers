@@ -138,8 +138,8 @@ make
 - time_to_sleep (in milliseconds): The time a philosopher spends sleeping.
 - number_of_times_each_philosopher_must_eat (optional argument): If all philosophers have eaten at least number_of_times_each_philosopher_must_eat times, the simulation ends. If this argument is not specified, then the simulation ends when a philosopher dies.
 
-## 👏 Acknowledgments
+## 👏 Acquired knowledge
 
-> - [📌  List any resources, contributors, inspiration, etc.]
+> - [📌 Threading: The project explores the creation and manipulation of threads to represent each philosopher.]
 
 ---
