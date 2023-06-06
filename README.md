@@ -2,7 +2,7 @@
 <h1 align="center">
 <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" width="100" />
 <br>
-42-Philosophers [![jremy's 42 Philosophers Score](https://badge42.vercel.app/api/v2/cl27cprhd001109mercwbbu5l/project/2510693)](https://github.com/JaeSeoKim/badge42)
+42-Philosophers <a href="https://github.com/JaeSeoKim/badge42"><img src="https://badge42.vercel.app/api/v2/cl27cprhd001109mercwbbu5l/project/2510693" alt="jremy's 42 Philosophers Score" /></a>
 </h1>
 <h3 align="center">📍 Unleash your inner philosopher with 42-Philosophers on GitHub!</h3>
 <h3 align="center">⚙️ Developed with the software and tools below:</h3>
