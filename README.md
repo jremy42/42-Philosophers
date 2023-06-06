@@ -1,6 +1,3 @@
-# 42-Philosophers
-[![jremy's 42 Philosophers Score](https://badge42.vercel.app/api/v2/cl27cprhd001109mercwbbu5l/project/2510693)](https://github.com/JaeSeoKim/badge42)
-
 <div align="center">
 <h1 align="center">
 <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" width="100" />
@@ -15,6 +12,7 @@
 <img src="https://img.shields.io/badge/C-A8B9CC.svg?style=for-the-badge&logo=C&logoColor=black" alt="C" />
 <img src="https://img.shields.io/badge/Markdown-000000.svg?style=for-the-badge&logo=Markdown&logoColor=white" alt="Markdown" />
 </p>
+   [![jremy's 42 Philosophers Score](https://badge42.vercel.app/api/v2/cl27cprhd001109mercwbbu5l/project/2510693)](https://github.com/JaeSeoKim/badge42)
 </div>
 
 ---
