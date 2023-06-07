@@ -16,7 +16,7 @@
 
 ## 📍 Overview
 
-The 42-Philosophers project is a multithreaded program that simulates the dining philosophers problem. It includes various files for initializing global variables, launching threads, printing messages, and handling philosopher states. The program offers a practical implementation of concurrent programming and synchronization using mutexes, semaphores, and time-related functionalities. Its value proposition lies in its ability to provide a hands-on learning experience for students to understand the challenges of concurrent programming and develop strategies to resolve them.
+The 42-Philosophers project is a multithreaded program that simulates the dining philosophers problem. It includes various files for launching threads, printing messages, and handling philosopher states. The program offers a practical implementation of concurrent programming and synchronization using mutexes, semaphores, and time-related functionalities. Its value proposition lies in its ability to provide a hands-on learning experience for students to understand the challenges of concurrent programming and develop strategies to resolve them.
 
 ---
 
